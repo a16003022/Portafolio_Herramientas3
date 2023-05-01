@@ -1,9 +1,22 @@
 def run():
     import streamlit as st
     import pandas as pd
+    import streamlit.components.v1 as components
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
     from sklearn.neighbors import KNeighborsClassifier
+
+    hide_streamlit_style = """
+        <style>
+        #MainMenu {visibility:hidden;}
+        footer {visibility:hidden;}
+        </style>
+        """
+
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    st.title("Entrenamiento y puntuación de modelos")
+    components.html(
+        """<hr style="height:3px;border:none; color:#333;background-color:#333" />""")
 
     # Carga de datos
     URL = 'https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv'
@@ -25,6 +38,7 @@ def run():
     # Entrenamiento del modelo seleccionado
     modelo = modelos[modelo_seleccionado]
     score = 1.0
+    # Para asegurarnos de no puntuar un modelo que se aprendió de memoria los datos
     while score == 1.0:
         modelo.fit(x_train, y_train)
         score = modelo.score(x_test, y_test)
