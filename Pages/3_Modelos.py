@@ -2,7 +2,10 @@ def run():
     import pandas as pd
     import streamlit as st
     import streamlit.components.v1 as components
+    from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import StratifiedKFold
+    from sklearn.model_selection import cross_val_score
     from sklearn.neighbors import KNeighborsClassifier
 
     hide_streamlit_style = """
@@ -33,15 +36,32 @@ def run():
     modelos.append(("LR", LogisticRegression()))
 
     st.subheader("Modelo Regresión Lineal")
-    st.write("Precisión del modelo:")
+    st.write("Puntuación:")
     st.write(modelo.score(x_test, y_test))
     st.write("Resultados de predicciones:")
     st.write(modelo.predict(x_test))
 
+    st.subheader("Modelo KFold")
+    skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=1)
+    model = KNeighborsClassifier(n_neighbors=3)
+    scores = []
+    predictions = []
+    for train_index, test_index in skf.split(x_train, y_train):
+        x_train_fold, x_test_fold = x_train.iloc[train_index], x_train.iloc[test_index]
+        y_train_fold, y_test_fold = y_train.iloc[train_index], y_train.iloc[test_index]
+        model.fit(x_train_fold, y_train_fold)
+        scores.append(model.score(x_test_fold, y_test_fold))
+        predictions.append(model.predict(x_test))
+    average_score = sum(scores) / len(scores)
+    st.write("Precisión del modelo:")
+    st.write(average_score)
+    st.write("Resultados de predicciones:")
+    st.write(predictions)
+
     st.subheader("Modelo KNeigghbors")
     modeloKN = KNeighborsClassifier(n_neighbors=3)
     modeloKN.fit(x_train, y_train)
-    st.write("Precisión del modelo:")
+    st.write("Precisión del modelo")
     st.write(modeloKN.score(x_test, y_test))
     st.write("Resultados de predicciones:")
     st.write(modeloKN.predict(x_test))
