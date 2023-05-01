@@ -24,7 +24,7 @@ def run():
 
     # Entrenamiento del modelo seleccionado
     modelo = modelos[modelo_seleccionado]
-    score = 0.0
+    score = 1.0
     while score == 1.0:
         modelo.fit(x_train, y_train)
         score = modelo.score(x_test, y_test)
