@@ -30,7 +30,7 @@ def run():
 
     # Widgets para selección de modelo
     modelos = {
-        "Regresión Logística": LogisticRegression(),
+        "Regresión Logística": LogisticRegression(max_iter=1000),
         "K-Vecinos más cercanos": KNeighborsClassifier()
     }
     modelo_seleccionado = st.selectbox("Selecciona el modelo a entrenar:", list(modelos.keys()))
