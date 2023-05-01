@@ -1,16 +1,13 @@
-# This is a sample Python script.
+import streamlit as st
+import os
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Obtener todos los archivos dentro de la carpeta "Pages"
+pages = os.listdir("Pages")
 
+# Mostrar un slidebar con todos los archivos
+selected_page = st.sidebar.selectbox("Selecciona una página", pages)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Cargar la página seleccionada
+page_path = os.path.join("Pages", selected_page)
+with open(page_path, "r") as f:
+    st.markdown(f.read())
