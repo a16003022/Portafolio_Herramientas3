@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import importlib
 
 # Obtener todas las páginas .py en la carpeta Pages
 pages = [f[:-3] for f in os.listdir("Pages") if f.endswith(".py")]
@@ -8,6 +9,6 @@ pages = [f[:-3] for f in os.listdir("Pages") if f.endswith(".py")]
 selection = st.sidebar.selectbox("Ir a", pages)
 
 # Importar la página seleccionada y ejecutarla
-page = __import__(f"Pages.{selection}")
-page.run()
+page_module = importlib.import_module(f"Pages.{selection}")
+page_module.run()
 
