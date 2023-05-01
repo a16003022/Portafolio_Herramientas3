@@ -25,9 +25,11 @@ def run():
     # Entrenamiento del modelo seleccionado
     modelo = modelos[modelo_seleccionado]
     modelo.fit(x_train, y_train)
-    score = modelo.score(x_test, y_test)
-    if score == 1: # Para que no puntuar un modelo que se lo aprendió de memoria jaja
+    if modelo.score == 1:
+        # Si el modelo se lo aprendió de memoria, vuelve a entrenar
         modelo.fit(x_train, y_train)
+        score = modelo.score(x_test, y_test)
+    else:
         score = modelo.score(x_test, y_test)
 
     # Resultados del modelo
