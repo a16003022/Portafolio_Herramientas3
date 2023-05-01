@@ -42,8 +42,9 @@ def run():
     st.write(modelo.predict(x_test))
 
     st.subheader("Modelo KFold")
+    modeloKN = KNeighborsClassifier(n_neighbors=3)
     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
-    resultados = cross_val_score(kfold, x_train, y_train, cv=kfold, scoring="accuracy")
+    resultados = cross_val_score(modeloKN, x_train, y_train, cv=kfold, scoring="accuracy")
     st.write("Resultados validación cruzada")
     st.write(resultados)
 
