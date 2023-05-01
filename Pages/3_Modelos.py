@@ -1,48 +1,34 @@
 def run():
-    import streamlit as st
     import pandas as pd
-    import streamlit.components.v1 as components
+    import streamlit as st
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import StratifiedKFold
+    from sklearn.model_selection import cross_val_score
     from sklearn.neighbors import KNeighborsClassifier
-
-    hide_streamlit_style = """
-        <style>
-        #MainMenu {visibility:hidden;}
-        footer {visibility:hidden;}
-        </style>
-        """
-
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    st.title("Entrenamiento y puntuación de modelos")
-    components.html(
-        """<hr style="height:3px;border:none; color:#333;background-color:#333" />""")
-
-    # Carga de datos
     URL = 'https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv'
     names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
     dfIris = pd.read_csv(URL, names=names)
     dfIris = dfIris[dfIris["sepal-length"] != "sepal.length"]
 
-    # Separación de datos en train y test
     x_train, x_test, y_train, y_test = train_test_split(dfIris[dfIris.columns[0:4]], dfIris[dfIris.columns[-1]],
                                                         test_size=0.2)
 
-    # Entrenamiento de modelos
-    modelos = {
-        "Regresión Logística": LogisticRegression(max_iter=5000),
-        "K-Vecinos más cercanos": KNeighborsClassifier()
-    }
-    scores = {}
+    modelos = []
+    # print(x_train, x_test)
+    modelo = LogisticRegression(random_state=0).fit(x_train, y_train)
+    modelo.score(x_test, y_test)
+    modelo.predict(x_test)
+    modelos.append(("LR", LogisticRegression()))
 
-    for nombre, modelo in modelos.items():
-        modelo.fit(x_train, y_train)
-        score = modelo.score(x_test, y_test)
-        while score == 1.0: # para no puntuar un modelo que se memorizó los datos
-            modelo.fit(x_train, y_train)
-            score = modelo.score(x_test, y_test)
-        scores[nombre] = score
+    st.write(modelo.score(x_test, y_test))
 
-    # Resultados de modelos
-    for nombre, score in scores.items():
-        st.write(f"El modelo {nombre} obtuvo una precisión de {score}")
+    st.write(modelo.predict(x_test))
+
+    # kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True )
+    # resultados = cross_val_score(modelo, xtrain, y_train, cv=kflod, scoring="accuracy")
+    # resultados
+
+    # modeloKN= KNeighborsClassifier(n_neighbors=3)
+    # modeloKN.fit(x_train, y_train)
+    # modeloKN.score(x_test)
