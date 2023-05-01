@@ -56,7 +56,8 @@ def run():
     st.write("Precisión del modelo:")
     st.write(average_score)
     st.write("Resultados de predicciones:")
-    st.write(predictions)
+    for i, pred in enumerate(predictions):
+        st.write(f"Fold {i + 1}: {pred}")
 
     st.subheader("Modelo KNeigghbors")
     modeloKN = KNeighborsClassifier(n_neighbors=3)
