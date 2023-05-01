@@ -4,10 +4,13 @@ import os
 # Obtener todos los archivos dentro de la carpeta "Pages"
 pages = os.listdir("Pages")
 
-# Mostrar un slidebar con todos los archivos
-selected_page = st.sidebar.selectbox("Selecciona una página", pages)
+# Crear una lista con el nombre de cada página
+page_names = [page.split(".")[0] for page in pages]
 
-# Cargar la página seleccionada
-page_path = os.path.join("Pages", selected_page)
-with open(page_path, "r") as f:
-    st.markdown(f.read())
+# Mostrar una lista de páginas en el sidebar
+selected_page = st.sidebar.radio("Selecciona una página", page_names)
+
+# Importar y mostrar la página seleccionada
+page_path = os.path.join("Pages", f"{selected_page}.py")
+page_module = __import__(f"Pages.{selected_page}")
+page_module.run()
