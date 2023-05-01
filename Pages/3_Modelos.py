@@ -24,11 +24,10 @@ def run():
 
     # Entrenamiento del modelo seleccionado
     modelo = modelos[modelo_seleccionado]
-    modelo.fit(x_train, y_train)
-    score = modelo.score(x_test, y_test)
-    if score == 1.0:
-        # Si el modelo se lo aprendió de memoria, vuelve a entrenar
+    score = 0.0
+    while score == 1.0:
         modelo.fit(x_train, y_train)
+        score = modelo.score(x_test, y_test)
 
     # Resultados del modelo
     st.write(f"El modelo {modelo_seleccionado} obtuvo una precisión de {score}")
