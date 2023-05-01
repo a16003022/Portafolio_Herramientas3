@@ -39,7 +39,6 @@ def run():
     st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("Correlación-Mapa de color")
-    dfIris = dfIris.drop('Setosa', axis=1)
     df_corr=dfIris.corr()
     fig = go.Figure()
     fig.add_trace(

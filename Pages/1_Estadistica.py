@@ -31,17 +31,3 @@ def run():
 
     st.write("Clases:")
     st.write(dfIris["variety"].value_counts())
-
-    if __name__ == "__main__":
-        import os
-        import glob
-
-        # Encuentra todos los archivos en la carpeta Pages
-        pages = glob.glob(os.path.join("Pages", "*.py"))
-
-        # Agrega el archivo actual al principio de la lista
-        pages.insert(0, __file__)
-
-        # Ejecuta cada archivo utilizando streamlit.run
-        for page in pages:
-            streamlit.run(page)
