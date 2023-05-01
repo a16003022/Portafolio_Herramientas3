@@ -36,15 +36,18 @@ def run():
     modelos.append(("LR", LogisticRegression()))
 
     st.subheader("Modelo Regresión Lineal")
+    st.write("Puntuación:")
     st.write(modelo.score(x_test, y_test))
+    st.write("Resultados de predicciones")
     st.write(modelo.predict(x_test))
 
     st.subheader("Modelo KFold")
-    kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True )
-    resultados = cross_val_score(modelo, x_train, y_train, cv=kfold, scoring="accuracy")
+    kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
+    resultados = cross_val_score(kfold, x_train, y_train, cv=kfold, scoring="accuracy")
+    st.write("Resultados validación cruzada")
     st.write(resultados)
 
     st.subheader("Modelo KNeigghbors")
     modeloKN = KNeighborsClassifier(n_neighbors=3)
     modeloKN.fit(x_train, y_train)
-    modeloKN.score(x_test)
+    st.write(modeloKN.score(x_test, y_test))
