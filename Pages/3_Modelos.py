@@ -41,10 +41,10 @@ def run():
 
     st.subheader("Modelo KFold")
     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True )
-    resultados = cross_val_score(modelo, xtrain, y_train, cv=kflod, scoring="accuracy")
+    resultados = cross_val_score(modelo, x_train, y_train, cv=kfold, scoring="accuracy")
     st.write(resultados)
 
     st.subheader("Modelo KNeigghbors")
-    modeloKN= KNeighborsClassifier(n_neighbors=3)
+    modeloKN = KNeighborsClassifier(n_neighbors=3)
     modeloKN.fit(x_train, y_train)
     modeloKN.score(x_test)
