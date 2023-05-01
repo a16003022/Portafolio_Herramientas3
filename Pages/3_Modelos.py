@@ -38,9 +38,6 @@ def run():
     for nombre, modelo in modelos.items():
         modelo.fit(x_train, y_train)
         score = modelo.score(x_test, y_test)
-        while score == 1.0:
-            modelo.fit(x_train, y_train)
-            score = modelo.score(x_test, y_test)
         scores[nombre] = score
 
     # Resultados de modelos
