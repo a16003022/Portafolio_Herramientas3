@@ -2,10 +2,7 @@ def run():
     import pandas as pd
     import streamlit as st
     import streamlit.components.v1 as components
-    from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
-    from sklearn.model_selection import StratifiedKFold
-    from sklearn.model_selection import cross_val_score
     from sklearn.neighbors import KNeighborsClassifier
 
     hide_streamlit_style = """
@@ -36,19 +33,15 @@ def run():
     modelos.append(("LR", LogisticRegression()))
 
     st.subheader("Modelo Regresión Lineal")
-    st.write("Puntuación:")
+    st.write("Precisión del modelo:")
     st.write(modelo.score(x_test, y_test))
-    st.write("Resultados de predicciones")
+    st.write("Resultados de predicciones:")
     st.write(modelo.predict(x_test))
-
-    st.subheader("Modelo KFold")
-    modeloKN = KNeighborsClassifier(n_neighbors=3)
-    kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
-    resultados = cross_val_score(modeloKN, x_train, y_train, cv=kfold, scoring="accuracy")
-    st.write("Resultados validación cruzada")
-    st.write(resultados)
 
     st.subheader("Modelo KNeigghbors")
     modeloKN = KNeighborsClassifier(n_neighbors=3)
     modeloKN.fit(x_train, y_train)
+    st.write("Precisión del modelo:")
     st.write(modeloKN.score(x_test, y_test))
+    st.write("Resultados de predicciones:")
+    st.write(modeloKN.predict(x_test))
