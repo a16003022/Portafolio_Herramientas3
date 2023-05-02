@@ -1,3 +1,8 @@
-# Portafolio_Herramientas3
-Repositorio de Heisler Narváez para la entrega del portafolio de la asignatura Herramientas 3, FCA.
--------------------------------------------------------------------------------------------------------
+# Portafolio Evidencias Herramientas3 - Heisler Narváez Kú
+--------------------------------------------------------------------------------------------------------
+1) Modelo en Azure ML Studio  - Screenshot del modelo generado :
+
+2) <b>IMPORTANTE:</b> Dicha práctica se encuentra al final del documento, ya que además contiene todos los ejercicios realizados en clase.<br>
+    Link del archivo colab: https://colab.research.google.com/drive/1nBuKbm_TV0SzAzG9XqcLSQGes_oM2TLd?usp=sharing 
+4) 
+5) 
