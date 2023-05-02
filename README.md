@@ -1,10 +1,10 @@
-# Portafolio Evidencias Herramientas3 - Heisler Narváez Kú
+# Portafolio Herramientas3 - Heisler Narváez Kú
 --------------------------------------------------------------------------------------------------------
 1) Modelo en Azure ML Studio  
 * a) Screenshot del modelo generado:
 ![Completado](https://github.com/a16003022/Portafolio_Herramientas3/blob/main/Completado.png)
 * b) Models:
-![Modelos](https://github.com/a16003022/Portafolio_Herramientas3/blob/main/Completado.png)
+![Modelos](https://github.com/a16003022/Portafolio_Herramientas3/blob/main/Modelos.png)
 * c) Métricas del mejor modelo:
 
 2) <b>IMPORTANTE:</b> Dicha práctica se encuentra al final del documento, ya que además contiene todos los ejercicios realizados en clase.<br>
